@@ -1,0 +1,60 @@
+:root {
+  --gap: 0.25rem;
+  --size: 50px;
+
+  --btn-color: #ccc;
+  --btn-hover: #aaa;
+  --op-color: #bbb;
+  --op-hover: #999;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.calculator {
+  border: 1px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.display {
+  border: none;
+  padding: var(--gap);
+  text-align: right;
+}
+
+.btns {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, var(--size));
+  gap: var(--gap);
+  padding: var(--gap);
+}
+
+.btn {
+  background-color: var(--btn-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 150ms linear;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover);
+}
+
+
