@@ -10,33 +10,39 @@
   </head>
   <body>
     <div class="calculator">
-      <input type="text" placeholder="0" class="display" />
+      <div class="display">
+        <div>
+          <div class="saved"></div>
+          <div class="operation"></div>
+        </div>
+        <div class="current">0</div>
+      </div>
     <div class="btns">
-      <div class="btn num" id="nine">9</div>
-      <div class="btn num" id="eight">8</div>
-      <div class="btn num" id="seven">7</div>
-      <div class="btn num" id="six">6</div>
-      <div class="btn num" id="five">5</div>
-      <div class="btn num" id="four">4</div>
-      <div class="btn num" id="three">3</div>
-      <div class="btn num" id="two">2</div>
-      <div class="btn num" id="one">1</div>
-      <div class="btn num" id="zero">0</div>
-      <div class="btn num" id="point">.</div>
-      <div class="btn num" id="inv">+-</div>
-      <div class="btn op" id="add">+</div>
-      <div class="btn op" id="sub">-</div>
-      <div class="btn op" id="mult">*</div>
-      <div class="btn op" id="div">/</div>
-      <div class="btn op" id="equals">=</div>
-      <div class="btn clr" id="clear-entry">CE</div>
-      <div class="btn clr" id="clear">C</div>
-      <div class="btn clr" id="delete">Delete</div>
-      <div class="btn func" id="percent">%</div>
-      <div class="btn func" id="sqrt">root</div>
-      <div class="btn func" id="squared">x^2</div>
-      <div class="btn func" id="cubed">x^3</div>
-      <div class="btn func" id="mult-inv">1/x</div>
+      <button class="btn num" value=9 id="nine" value=9>9</button>
+      <button class="btn num" value=8 id="eight">8</button>
+      <button class="btn num" value=7 id="seven">7</button>
+      <button class="btn num" value=6 id="six">6</button>
+      <button class="btn num" value=5 id="five">5</button>
+      <button class="btn num" value=4 id="four">4</button>
+      <button class="btn num" value=3 id="three">3</button>
+      <button class="btn num" value=2 id="two">2</button>
+      <button class="btn num" value=1 id="one">1</button>
+      <button class="btn num" value=0 id="zero">0</button>
+      <button class="btn " id="point">.</button>
+      <button class="btn " id="inv">+-</button>
+      <button class="btn op" value='+' id="add" data-operation>+</button>
+      <button class="btn op" value='-' id="sub" data-operation>-</button>
+      <button class="btn op" value='*' id="mult" data-operation>*</button>
+      <button class="btn op" value='/' id="div" data-operation>/</button>
+      <button class="btn op" value='=' id="equals" data-operation>=</button>
+      <button class="btn clr" id="clear-entry">CE</button>
+      <button class="btn clr" id="clear">C</button>
+      <button class="btn clr" id="delete">Delete</button>
+      <button class="btn func" id="percent" data-operation>%</button>
+      <button class="btn func" id="sqrt" data-operation>root</button>
+      <button class="btn func" id="squared" data-operation>x^2</button>
+      <button class="btn func" id="cubed" data-operation>x^3</button>
+      <button class="btn func" id="mult-inv"> data-operation1/x</button>
     </div>
   </body>
 </html>
