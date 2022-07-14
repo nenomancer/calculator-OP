@@ -1,7 +1,7 @@
 const display = document.querySelector(".display");
 const currentDisplay = document.querySelector("[data-current]");
 const previousDisplay = document.querySelector("[data-previous]");
-const operationDisplay = document.querySelector(".operation");
+// const operationDisplay = document.querySelector(".operation");
 const numberButtons = [...document.querySelectorAll("[data-number]")];
 
 const equalsButton = document.querySelector("[data-equals]");
@@ -15,7 +15,7 @@ const updateDisplay = () => {
   currentDisplay.textContent = currentValue;
   previousDisplay.textContent = previousValue;
   previousDisplay.textContent = previousValue;
-  operationDisplay.textContent = operationValue;
+  // operationDisplay.textContent = operationValue;
 };
 
 const resetDisplay = () => {};
@@ -39,10 +39,10 @@ const calculate = () => {
     case "-":
       result = previous - current;
       break;
-    case "*":
+    case "×":
       result = previous * current;
       break;
-    case "/":
+    case "÷":
       result = previous / current;
       break;
     default:
@@ -58,7 +58,7 @@ const calculate = () => {
 const setOperation = (operation) => {
   if (operationValue !== null) calculate();
   operationValue = operation.textContent;
-  previousValue = currentValue;
+  previousValue = `${currentValue}${operationValue}`;
   currentValue = "";
   updateDisplay();
 };

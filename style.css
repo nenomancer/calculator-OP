@@ -1,8 +1,14 @@
 :root {
-  --gap: 0.25rem;
+  --gap: 0.5rem;
   --size: 50px;
 
-  --dark: #4b6584;
+  --black: #111;
+  --dark: #222;
+  --medium: #444;
+  --light: #aaa;
+  --white: #eee;
+
+  --accent-color: orange;
 
   --btn-color: #d1d8e0;
   --btn-hover: #aaa;
@@ -21,48 +27,114 @@
 }
 
 body {
-  background-color: var(--dark);
+  background-color: var(--medium);
+  font-family: "Kantumruy Pro", sans-serif;
 }
 
 .calculator {
-  border: 1px solid black;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
   display: flex;
   flex-direction: column;
+  padding: var(--gap);
+  background-color: var(--dark);
+  box-shadow: 20px 10px 100px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
-.display {
-  border: none;
+.calculator::after {
+  --border-size: 1px;
+  --blur: calc(var(--border-size) * 2);
+  content: "";
+  display: block;
+  position: absolute;
   width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border: var(--border-size) solid;
+  border-color: var(--white) var(--black) var(--black) var(--white);
+  filter: blur(var(--blur));
+  border-radius: 1rem;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.calculator .display {
+  border: none;
   font-size: 36px;
   text-align: right;
-  display: grid;
-  overflow: hidden;
-  grid-template-rows: 30px 50px;
+  flex-direction: column;
+  display: flex;
+  padding: 10px;
+  align-items: flex-end;
+  /* justify-content: space-evenly; */
+  height: 100%;
+  background-color: var(--accent-color);
+  margin: var(--gap);
+  font-family:  'Tulpen One', cursive;
+  font-weight: bold;
 }
 
-.previous {
-  background-color: blue;
+.display .previous {
   display: flex;
   justify-content: flex-end;
   font-size: 1.5rem;
+  min-height: 2rem;
 }
 
-.current {
+.display .current {
+  font-size: 3rem;
+  min-height: 4rem;
 }
 
 button {
+  position: relative;
+  height: var(--size);
+  width: var(--size);
   outline: none;
   border: none;
+  cursor: pointer;
+  transition: all 150ms linear;
+  border-radius: 50%;
+  background-color: var(--dark);
+  color: var(--light);
+
+  text-shadow: 0 -1px 1px var(--black);
 }
 
-.buttons {
+button::after {
+  position: absolute;
+  content: "";
+  display: block;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  mix-blend-mode: overlay;
+  border-radius: 50%;
+
+  border-style: solid;
+  border-width: 1.5px;
+  border-color: var(--white) var(--black) var(--black) var(--white);
+  filter: blur(5px);
+}
+
+.calculator .buttons {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
+}
+
+.buttons .number {
+  color: var(--accent-color);
+}
+
+.buttons .number:hover {
 }
 
 .numbers {
@@ -71,38 +143,13 @@ button {
   grid-template-rows: repeat(5, var(--size));
   gap: var(--gap);
   margin: 0 var(--gap);
+  justify-items: center;
 }
 
 .functions {
-  /* display: flex;
-  flex-direction: column; */
-  gap: var(--gap);
   display: grid;
-}
+  grid-template-rows: repeat(5, var(--size));
+  gap: var(--gap);
 
-.btn {
-  background-color: var(--btn-color);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 150ms linear;
-}
-
-.btn:hover {
-  background-color: var(--btn-hover);
-}
-
-.operation {
-  background-color: var(--op-color);
-}
-
-.op:hover {
-  background-color: var(--op-hover);
-}
-
-.num {
-  background-color: var(--num-color);
+  justify-items: center;
 }
