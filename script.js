@@ -1,84 +1,72 @@
-const numberButtons = document.querySelectorAll("[data-number]");
-const operationButtons = document.querySelectorAll("[data-operation]");
-const equalsButton = document.querySelector("[data-equals]");
-const deleteButton = document.querySelector("[data-delete]");
-const clearEntryButton = document.querySelector("[data-clearEntry]");
-const clearAllButton = document.querySelector("[data-clearAll]");
-
+const display = document.querySelector(".display");
 const currentDisplay = document.querySelector("[data-current]");
 const previousDisplay = document.querySelector("[data-previous]");
+const operationDisplay = document.querySelector(".operation");
+const numberButtons = [...document.querySelectorAll("[data-number]")];
+
+const equalsButton = document.querySelector("[data-equals]");
+const operations = [...document.querySelectorAll("[data-operation]")];
 
 let currentValue = "";
 let previousValue = "";
-let operation = undefined;
+let operationValue = null;
 
-const clear = () => {
-  previousDisplay = "";
-  currentDisplay = "";
-  operation = undefined;
+const updateDisplay = () => {
+  currentDisplay.textContent = currentValue;
+  previousDisplay.textContent = previousValue;
+  previousDisplay.textContent = previousValue;
+  operationDisplay.textContent = operationValue;
 };
 
-const removeNumber = () => {};
+const resetDisplay = () => {};
 
-const appendNumber = (number) => {
-  if (number === "." && currentValue.includes(".")) return;
-  currentValue += number;
-};
+numberButtons.forEach((number) =>
+  number.addEventListener("click", () => {
+    currentValue += number.innerText;
+    updateDisplay();
+  })
+);
 
-const chooseOperation = (operation) => {
-  if (currentValue === "") return;
-  if (previousValue !== "") calculate();
-
-  operation = operation;
-  previousValue = currentValue;
-  currentValue = "";
-};
-
-const calculate = (a, b, op) => {
+const calculate = () => {
+  const previous = parseFloat(previousValue);
+  const current = parseFloat(currentValue);
+  const operation = operationValue;
   let result;
-  const previous = parseFloat(a);
-  const current = parseFloat(b);
-  if (isNaN(previous) || isNaN(current)) return;
-  switch (op) {
+  switch (operation) {
     case "+":
-      return previous + current;
+      result = previous + current;
+      break;
     case "-":
-      return previous - current;
-    case "×":
-      return previous * current;
-    case "÷":
-      return previous / current;
+      result = previous - current;
+      break;
+    case "*":
+      result = previous * current;
+      break;
+    case "/":
+      result = previous / current;
+      break;
     default:
       return;
   }
+
   currentValue = result;
-  operation = undefined;
   previousValue = "";
-};
-
-const updateDisplay = () => {
-  currentDisplay.innerText = currentValue;
-  previousDisplay.innerText = previousValue;
-};
-
-numberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    appendNumber(button.innerText);
-    updateDisplay();
-  });
-});
-
-operationButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    chooseOperation(button.innerText);
-    updateDisplay();
-  });
-});
-
-equalsButton.addEventListener("click", (button) => {
-  const result = calculate(previousValue, currentValue, operation);
-  console.log(result);
+  operationValue = null;
   updateDisplay();
-});
+};
 
-// console.log(calculate("200", "50", "+"));
+const setOperation = (operation) => {
+  if (operationValue !== null) calculate();
+  operationValue = operation.textContent;
+  previousValue = currentValue;
+  currentValue = "";
+  updateDisplay();
+};
+
+operations.forEach((operation) =>
+  operation.addEventListener("click", () => {
+    setOperation(operation);
+  })
+);
+
+equalsButton.addEventListener("click", () => calculate());

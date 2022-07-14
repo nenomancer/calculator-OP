@@ -43,8 +43,7 @@ body {
   text-align: right;
   display: grid;
   overflow: hidden;
-  grid-template-rows: 1fr 2fr;
-  background-color: yellow;
+  grid-template-rows: 30px 50px;
 }
 
 .display > div:nth-of-type(1) {
@@ -82,7 +81,7 @@ body {
   background-color: var(--btn-hover);
 }
 
-.op {
+.operation {
   background-color: var(--op-color);
 }
 
