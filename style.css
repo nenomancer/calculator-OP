@@ -39,12 +39,12 @@ body {
 .display {
   border: none;
   width: 100%;
-  padding: calc(var(--gap) * 4);
   font-size: 36px;
   text-align: right;
   display: grid;
   overflow: hidden;
-  grid-template-rows: 30px minmax(50px 500px);
+  grid-template-rows: 1fr 2fr;
+  background-color: yellow;
 }
 
 .display > div:nth-of-type(1) {
@@ -60,7 +60,7 @@ body {
 
 .btns {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, var(--size));
   gap: var(--gap);
   padding: var(--gap);
@@ -92,84 +92,4 @@ body {
 
 .num {
   background-color: var(--num-color);
-}
-
-#nine {
-  grid-area: 2 / 4;
-}
-
-#eight {
-  grid-area: 2 / 3;
-}
-
-#seven {
-  grid-area: 2 / 2;
-}
-
-#six {
-  grid-area: 3 / 4;
-}
-
-#five {
-  grid-area: 3 / 3;
-}
-
-#four {
-  grid-area: 3 / 2;
-}
-
-#three {
-  grid-area: 4 / 4;
-}
-
-#two {
-  grid-area: 4 / 3;
-}
-
-#one {
-  grid-area: 4 / 2;
-}
-
-#zero {
-  grid-area: 5 / 3;
-}
-
-#equals {
-  grid-area: 5 / 5;
-}
-
-#add {
-  grid-area: 4 / 5;
-}
-
-#sub {
-  grid-area: 3 / 5;
-}
-
-#mult {
-  grid-area: 2 / 5;
-}
-
-#div {
-  grid-area: 1 / 5;
-}
-
-#delete {
-  grid-area: 1 / 4;
-}
-
-#clear-entry {
-  grid-area: 1 / 3;
-}
-
-#clear {
-  grid-area: 1 / 2;
-}
-
-#point {
-  grid-area: 5 / 4;
-}
-
-#inv {
-  grid-area: 5 / 2;
 }

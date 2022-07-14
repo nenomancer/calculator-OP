@@ -1,63 +1,84 @@
-const add = (a, b) => a + b;
+const numberButtons = document.querySelectorAll("[data-number]");
+const operationButtons = document.querySelectorAll("[data-operation]");
+const equalsButton = document.querySelector("[data-equals]");
+const deleteButton = document.querySelector("[data-delete]");
+const clearEntryButton = document.querySelector("[data-clearEntry]");
+const clearAllButton = document.querySelector("[data-clearAll]");
 
-const sub = (a, b) => a - b;
-
-const mult = (a, b) => a * b;
-
-const div = (a, b) => a / b;
-
-const operate = (op, a, b) => {
-  return op(a, b);
-};
-
-const nums = [...document.getElementsByClassName("num")];
-const display = document.querySelector(".display");
-const currentDisplay = document.querySelector(".current");
-const savedDisplay = document.querySelector(".saved");
-const opDisplay = document.querySelector(".operation");
-
-const ops = [...document.querySelectorAll("[data-operation]")];
+const currentDisplay = document.querySelector("[data-current]");
+const previousDisplay = document.querySelector("[data-previous]");
 
 let currentValue = "";
-let savedValue = "";
+let previousValue = "";
+let operation = undefined;
 
-let result = 0;
-
-nums.forEach((num) =>
-  num.addEventListener("click", () => {
-    currentValue += num.value;
-    currentDisplay.textContent = currentValue;
-  })
-);
-
-const submitOperation = (num, op) => {
-  let sign = "";
-  switch (op) {
-    case "add":
-      sign = "+";
-      break;
-    case "sub":
-      sign = "-";
-      break;
-    case "mult":
-      sign = "x";
-      break;
-    case "div":
-      sign = "/";
-      break;
-  }
-  savedDisplay.textContent = currentValue;
-  opDisplay.textContent = sign;
-  savedValue = parseInt(currentValue);
-
-  // Initialize value and display
-  currentValue = "";
-  currentDisplay.textContent = "0";
+const clear = () => {
+  previousDisplay = "";
+  currentDisplay = "";
+  operation = undefined;
 };
 
-ops.forEach((op) =>
-  op.addEventListener("click", () => {
-    submitOperation(parseInt(currentValue), op.id);
-    console.log(op.id);
-  })
-);
+const removeNumber = () => {};
+
+const appendNumber = (number) => {
+  if (number === "." && currentValue.includes(".")) return;
+  currentValue += number;
+};
+
+const chooseOperation = (operation) => {
+  if (currentValue === "") return;
+  if (previousValue !== "") calculate();
+
+  operation = operation;
+  previousValue = currentValue;
+  currentValue = "";
+};
+
+const calculate = (a, b, op) => {
+  let result;
+  const previous = parseFloat(a);
+  const current = parseFloat(b);
+  if (isNaN(previous) || isNaN(current)) return;
+  switch (op) {
+    case "+":
+      return previous + current;
+    case "-":
+      return previous - current;
+    case "×":
+      return previous * current;
+    case "÷":
+      return previous / current;
+    default:
+      return;
+  }
+  currentValue = result;
+  operation = undefined;
+  previousValue = "";
+};
+
+const updateDisplay = () => {
+  currentDisplay.innerText = currentValue;
+  previousDisplay.innerText = previousValue;
+};
+
+numberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    appendNumber(button.innerText);
+    updateDisplay();
+  });
+});
+
+operationButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    chooseOperation(button.innerText);
+    updateDisplay();
+  });
+});
+
+equalsButton.addEventListener("click", (button) => {
+  const result = calculate(previousValue, currentValue, operation);
+  console.log(result);
+  updateDisplay();
+});
+
+// console.log(calculate("200", "50", "+"));
