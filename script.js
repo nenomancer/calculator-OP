@@ -10,12 +10,13 @@ const operate = (op, a, b) => {
   return op(a, b);
 };
 
-const numbers = [...document.querySelectorAll("[data-number]")];
 const display = document.querySelector(".display");
 const currentDisplay = document.querySelector("[data-current]");
 const previousDisplay = document.querySelector("[data-previous]");
 const operationDisplay = document.querySelector(".operation");
+const numberButtons = [...document.querySelectorAll("[data-number]")];
 
+const equalsButton = document.querySelector("[data-equals]");
 const operations = [...document.querySelectorAll("[data-operation]")];
 
 let currentValue = "";
@@ -31,18 +32,17 @@ const updateDisplay = () => {
 
 const resetDisplay = () => {};
 
-numbers.forEach((number) =>
+numberButtons.forEach((number) =>
   number.addEventListener("click", () => {
-    console.log(currentValue);
     currentValue += number.innerText;
     updateDisplay();
   })
 );
 
-const calculate = (a, b, operation) => {
-  console.log(`PREV: ${a}, CURRR: ${b}, OP: ${operation}`);
-  const previous = parseFloat(a);
-  const current = parseFloat(b);
+const calculate = () => {
+  const previous = parseFloat(previousValue);
+  const current = parseFloat(currentValue);
+  const operation = operationValue;
   let result;
   switch (operation) {
     case "+":
@@ -60,17 +60,19 @@ const calculate = (a, b, operation) => {
     default:
       return;
   }
+
   currentValue = result;
+  previousValue = '';
+  operationValue = null;
+  updateDisplay();
 };
 
 const setOperation = (operation) => {
-  if (operationValue !== null)
-    calculate(previousValue, currentValue, operationValue);
+  if (operationValue !== null) calculate();
   operationValue = operation.textContent;
   previousValue = currentValue;
   currentValue = "";
   updateDisplay();
-  console.log(operationValue);
 };
 
 operations.forEach((operation) =>
@@ -78,3 +80,5 @@ operations.forEach((operation) =>
     setOperation(operation);
   })
 );
+
+equalsButton.addEventListener("click", () => calculate());
