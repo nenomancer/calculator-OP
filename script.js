@@ -10,54 +10,71 @@ const operate = (op, a, b) => {
   return op(a, b);
 };
 
-const nums = [...document.getElementsByClassName("num")];
+const numbers = [...document.querySelectorAll("[data-number]")];
 const display = document.querySelector(".display");
-const currentDisplay = document.querySelector(".current");
-const savedDisplay = document.querySelector(".saved");
-const opDisplay = document.querySelector(".operation");
+const currentDisplay = document.querySelector("[data-current]");
+const previousDisplay = document.querySelector("[data-previous]");
+const operationDisplay = document.querySelector(".operation");
 
-const ops = [...document.querySelectorAll("[data-operation]")];
+const operations = [...document.querySelectorAll("[data-operation]")];
 
 let currentValue = "";
-let savedValue = "";
+let previousValue = "";
+let operationValue = null;
 
-let result = 0;
+const updateDisplay = () => {
+  currentDisplay.textContent = currentValue;
+  previousDisplay.textContent = previousValue;
+  previousDisplay.textContent = previousValue;
+  operationDisplay.textContent = operationValue;
+};
 
-nums.forEach((num) =>
-  num.addEventListener("click", () => {
-    currentValue += num.value;
-    currentDisplay.textContent = currentValue;
+const resetDisplay = () => {};
+
+numbers.forEach((number) =>
+  number.addEventListener("click", () => {
+    console.log(currentValue);
+    currentValue += number.innerText;
+    updateDisplay();
   })
 );
 
-const submitOperation = (num, op) => {
-  let sign = "";
-  switch (op) {
-    case "add":
-      sign = "+";
+const calculate = (a, b, operation) => {
+  console.log(`PREV: ${a}, CURRR: ${b}, OP: ${operation}`);
+  const previous = parseFloat(a);
+  const current = parseFloat(b);
+  let result;
+  switch (operation) {
+    case "+":
+      result = previous + current;
       break;
-    case "sub":
-      sign = "-";
+    case "-":
+      result = previous - current;
       break;
-    case "mult":
-      sign = "x";
+    case "*":
+      result = previous * current;
       break;
-    case "div":
-      sign = "/";
+    case "/":
+      result = previous / current;
       break;
+    default:
+      return;
   }
-  savedDisplay.textContent = currentValue;
-  opDisplay.textContent = sign;
-  savedValue = parseInt(currentValue);
-
-  // Initialize value and display
-  currentValue = "";
-  currentDisplay.textContent = "0";
+  currentValue = result;
 };
 
-ops.forEach((op) =>
-  op.addEventListener("click", () => {
-    submitOperation(parseInt(currentValue), op.id);
-    console.log(op.id);
+const setOperation = (operation) => {
+  if (operationValue !== null)
+    calculate(previousValue, currentValue, operationValue);
+  operationValue = operation.textContent;
+  previousValue = currentValue;
+  currentValue = "";
+  updateDisplay();
+  console.log(operationValue);
+};
+
+operations.forEach((operation) =>
+  operation.addEventListener("click", () => {
+    setOperation(operation);
   })
 );

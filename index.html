@@ -12,32 +12,32 @@
     <div class="calculator">
       <div class="display">
         <div>
-          <div class="saved"></div>
-          <div class="operation"></div>
+          <div class="previous" data-previous=""></div>
+          <div class="operation" data-operation=""></div>
         </div>
-        <div class="current">0</div>
+        <div class="current" data-current="">0</div>
       </div>
     <div class="btns">
-      <button class="btn num" value=9 id="nine" value=9>9</button>
-      <button class="btn num" value=8 id="eight">8</button>
-      <button class="btn num" value=7 id="seven">7</button>
-      <button class="btn num" value=6 id="six">6</button>
-      <button class="btn num" value=5 id="five">5</button>
-      <button class="btn num" value=4 id="four">4</button>
-      <button class="btn num" value=3 id="three">3</button>
-      <button class="btn num" value=2 id="two">2</button>
-      <button class="btn num" value=1 id="one">1</button>
-      <button class="btn num" value=0 id="zero">0</button>
-      <button class="btn " id="point">.</button>
-      <button class="btn " id="inv">+-</button>
-      <button class="btn op" value='+' id="add" data-operation>+</button>
-      <button class="btn op" value='-' id="sub" data-operation>-</button>
-      <button class="btn op" value='*' id="mult" data-operation>*</button>
-      <button class="btn op" value='/' id="div" data-operation>/</button>
-      <button class="btn op" value='=' id="equals" data-operation>=</button>
-      <button class="btn clr" id="clear-entry">CE</button>
-      <button class="btn clr" id="clear">C</button>
-      <button class="btn clr" id="delete">Delete</button>
+      <button class="btn num" data-number id="nine" >9</button>
+      <button class="btn num" data-number id="eight">8</button>
+      <button class="btn num" data-number id="seven">7</button>
+      <button class="btn num" data-number id="six">6</button>
+      <button class="btn num" data-number id="five">5</button>
+      <button class="btn num" data-number id="four">4</button>
+      <button class="btn num" data-number id="three">3</button>
+      <button class="btn num" data-number id="two">2</button>
+      <button class="btn num" data-number id="one">1</button>
+      <button class="btn num" data-number id="zero">0</button>
+      <button class="btn " data-number id="point">.</button>
+      <button class="btn " data-number id="inv">+-</button>
+      <button class="btn operation" id="add" data-operation>+</button>
+      <button class="btn operation" id="sub" data-operation>-</button>
+      <button class="btn operation" id="mult" data-operation>*</button>
+      <button class="btn operation" id="div" data-operation>/</button>
+      <button class="btn operation" id="equals" data-equals>=</button>
+      <button class="btn clr" id="clear-entry" data-delete >CE</button>
+      <button class="btn clr" id="clear" data-delete >C</button>
+      <button class="btn clr" id="delete" data-delete >Delete</button>
       <button class="btn func" id="percent" data-operation>%</button>
       <button class="btn func" id="sqrt" data-operation>root</button>
       <button class="btn func" id="squared" data-operation>x^2</button>
